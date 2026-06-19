@@ -19,7 +19,7 @@ return new class extends Migration {
                 ->constrained('documentos')
                 ->cascadeOnDelete();
 
-            $table->enum('estado', Estados::cases());
+            $table->enum('tipo', Estados::values());
 
             $table->foreignId('usuario_id')
                 ->nullable()

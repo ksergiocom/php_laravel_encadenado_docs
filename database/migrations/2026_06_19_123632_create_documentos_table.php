@@ -19,7 +19,8 @@ return new class extends Migration {
             $table->string('slug');
             $table->integer('version');
 
-            $table->enum('estado', Estados::cases())->default(Estados::PUBLICADO);
+            $table->enum('estado', Estados::values())
+                ->default(Estados::PUBLICADO->value);
 
             $table->string('path');
             $table->string('file_hash', 64);

@@ -93,9 +93,11 @@ class DocumentoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Documento $documento)
     {
-        //
+        return view('admin.show',[
+            'documento' => $documento
+        ]);
     }
 
     /**
