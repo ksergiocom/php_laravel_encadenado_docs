@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->string('path');
             $table->string('file_hash', 64);
 
-            $table->timestamp('publicado_at');
+            $table->timestamp('publicado_at')->nullable();
             $table->timestamp('retirado_at')->nullable();
 
             $table->foreignId('sustituye_a_documento_id')
@@ -39,12 +39,12 @@ return new class extends Migration {
 
             $table->foreignId('publicado_por_usuario_id')
                 ->nullable()
-                ->constrained('user')
+                ->constrained('users')
                 ->nullOnDelete();
 
             $table->foreignId('retirado_por_usuario_id')
                 ->nullable()
-                ->constrained('user')
+                ->constrained('users')
                 ->nullOnDelete();
 
             $table->timestamps();

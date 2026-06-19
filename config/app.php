@@ -123,4 +123,8 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+
+    // Clave custom para el hash de los documentos
+    'evidence_key' => env('EVIDENCE_KEY'),
+
 ];

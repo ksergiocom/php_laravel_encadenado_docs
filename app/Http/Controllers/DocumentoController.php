@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\Documento;
 use App\Enums\Estados;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+use App\Services\DocumentoEventoService;
 
 class DocumentoController extends Controller
 {
@@ -31,38 +33,61 @@ class DocumentoController extends Controller
         return view('admin.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(Request $request, DocumentoEventoService $eventoService)
     {
         $validated = $request->validate([
             'titulo' => ['required', 'string'],
-            'archivo' => ['required', 'file', 'mimes:pdf', 'max:51200'], // 50MB máximo!
+            'archivo' => ['required', 'file', 'mimes:pdf', 'max:51200'],
         ]);
 
-        // Datos basicos
-        $titulo = $validated['titulo'];
-        $slug = Str::slug($titulo);
-        $version = 1;
+        $path = null;
 
-        // Guardando el fichero
-        $filename = $slug . '-v' . $version . '.pdf';
-        $path = $request->file('archivo')->storeAs('documentos', $filename, 'public');
+        try {
+            $titulo = $validated['titulo'];
+            $slug = Str::slug($titulo);
+            $version = 1;
 
-        // Guradando en DB
-        $documento = new Documento();
+            $filename = $slug . '-v' . $version . '.pdf';
 
-        $documento->titulo = $titulo;
-        $documento->slug = $slug;
-        $documento->version = $version;
-        $documento->estado = Estados::PUBLICADO;
-        $documento->path = $path;
-        $documento->publicado_at = now();
+            $path = $request->file('archivo')->storeAs(
+                'documentos',
+                $filename,
+                'public'
+            );
 
-        $documento->save();
+            DB::transaction(function () use ($titulo, $slug, $version, $path, $request, $eventoService) {
+                $fileHash = $eventoService->calcularHashArchivo($path);
 
-        return redirect()->route('admin.index');
+                $documento = new Documento();
+
+                $documento->titulo = $titulo;
+                $documento->slug = $slug;
+                $documento->version = $version;
+                $documento->estado = Estados::PUBLICADO;
+                $documento->path = $path;
+                $documento->file_hash = $fileHash;
+                $documento->publicado_at = now();
+                $documento->publicado_por_usuario_id = auth()->id();
+
+                $documento->save();
+
+                $eventoService->registrar(
+                    tipo: 'publicado',
+                    documento: $documento,
+                    documentoPrevio: null,
+                    request: $request
+                );
+            });
+
+            return redirect()->route('admin.index');
+
+        } catch (\Throwable $e) {
+            if ($path) {
+                Storage::disk('public')->delete($path);
+            }
+
+            throw $e;
+        }
     }
 
     /**
@@ -83,52 +108,101 @@ class DocumentoController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Documento $documento)
-    {
+    public function update(
+        Request $request,
+        Documento $documento,
+        DocumentoEventoService $eventoService
+    ) {
         $validated = $request->validate([
             'titulo' => ['required', 'string'],
-            'archivo' => ['required', 'file', 'mimes:pdf', 'max:51200'], // 50MB máximo!
+            'archivo' => ['required', 'file', 'mimes:pdf', 'max:51200'],
         ]);
 
-        DB::transaction(function () use ($request, $validated, $documento) {
-            // Para generar el nuevo nombre de fichero
+        $path = null;
+
+        try {
             $titulo = $validated['titulo'];
             $slug = Str::slug($titulo);
             $nuevaVersion = $documento->version + 1;
+
             $filename = $slug . '-v' . $nuevaVersion . '.pdf';
-            $path = $request->file('archivo')->storeAs('documentos', $filename, 'public');
 
-            // Guradando en DB el nuevo
-            $documentoNuevo = new Documento();
+            $path = $request->file('archivo')->storeAs(
+                'documentos',
+                $filename,
+                'public'
+            );
 
-            $documentoNuevo->titulo = $titulo;
-            $documentoNuevo->slug = $slug;
-            $documentoNuevo->version = $nuevaVersion;
-            $documentoNuevo->estado = Estados::PUBLICADO;
-            $documentoNuevo->path = $path;
-            $documentoNuevo->publicado_at = now();
-            $documentoNuevo->sustituye_a_id = $documento->id;
+            DB::transaction(function () use ($titulo, $slug, $nuevaVersion, $path, $documento, $request, $eventoService) {
+                $fileHash = $eventoService->calcularHashArchivo($path);
 
-            $documentoNuevo->save();
+                $documentoNuevo = new Documento();
 
-            // El viejo se marca como sustituido
-            $documento->estado = Estados::SUSTITUIDO;
-            $documento->retirado_at = now();
-            $documento->sustituido_por_id = $documentoNuevo->id;
-            $documento->save();
-        });
+                $documentoNuevo->titulo = $titulo;
+                $documentoNuevo->slug = $slug;
+                $documentoNuevo->version = $nuevaVersion;
+                $documentoNuevo->estado = Estados::PUBLICADO;
+                $documentoNuevo->path = $path;
+                $documentoNuevo->file_hash = $fileHash;
+                $documentoNuevo->publicado_at = now();
+                $documentoNuevo->publicado_por_usuario_id = auth()->id();
+                $documentoNuevo->sustituye_a_documento_id = $documento->id;
 
-        return redirect()->route('admin.index');
+                $documentoNuevo->save();
+
+                $documento->estado = Estados::SUSTITUIDO;
+                $documento->retirado_at = now();
+                $documento->retirado_por_usuario_id = auth()->id();
+                $documento->sustituido_por_documento_id = $documentoNuevo->id;
+
+                $documento->save();
+
+                $eventoService->registrar(
+                    tipo: 'sustituido',
+                    documento: $documentoNuevo,
+                    documentoPrevio: $documento,
+                    request: $request,
+                    extraPayload: [
+                        'accion_sobre_documento_anterior' => [
+                            'id' => $documento->id,
+                            'estado' => $documento->estado,
+                            'retirado_at' => $documento->retirado_at?->toISOString(),
+                            'retirado_por_usuario_id' => $documento->retirado_por_usuario_id,
+                        ],
+                    ]
+                );
+            });
+
+            return redirect()->route('admin.index');
+
+        } catch (\Throwable $e) {
+            if ($path) {
+                Storage::disk('public')->delete($path);
+            }
+
+            throw $e;
+        }
     }
 
-    public function retirar(Documento $documento)
-    {
-        $documento->estado = Estados::RETIRADO;
-        $documento->retirado_at = now();
-        $documento->save();
+    public function retirar(
+        Request $request,
+        Documento $documento,
+        DocumentoEventoService $eventoService
+    ) {
+        DB::transaction(function () use ($documento, $request, $eventoService) {
+            $documento->estado = Estados::RETIRADO;
+            $documento->retirado_at = now();
+            $documento->retirado_por_usuario_id = auth()->id();
+
+            $documento->save();
+
+            $eventoService->registrar(
+                tipo: 'retirado',
+                documento: $documento,
+                documentoPrevio: null,
+                request: $request
+            );
+        });
 
         return redirect()->route('admin.index');
     }
