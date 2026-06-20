@@ -2,10 +2,15 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DocumentoController;
+use App\Models\Documento;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    $documentos = Documento::all();
+
+    return view('welcome', [
+        'documentos' => $documentos,
+    ]);
 });
 
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
