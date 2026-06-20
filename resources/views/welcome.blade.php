@@ -14,29 +14,6 @@
                 </div>
             </div>
         </div>
-        <div id="voy" class="snap-start min-h-dvh w-full bg-white  p-5 text-gray-900 gap-5 relative">
-            <div class="flex flex-col gap-5">
-                <h2 class="text-4xl xl:text-7xl fade-in">Publicación de anuncios
-                </h2>
-                @if($documentos->isNotEmpty())
-                    <ul>
-                        @foreach($documentos as $documento)
-                            <li>
-                                <a href="{{ asset('storage/' . $documento->path) }}">Publicación:
-                                    {{$documento->publicado_at}}{{ $documento->titulo }}
-                                    @if($documento->estado != 'publicado')
-                                        ({{ $documento->estado }})
-                                    @endif
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                @else
-                    <p>No hay documentos disponibles.</p>
-                @endif
-            </div>
-            <a href="#como" class="animate-bounce text-5xl xl:text-7xl absolute bottom-0">&darr;</a>
-        </div>
         <div id="como" class="snap-start min-h-dvh w-full bg-black xl:content-center  p-5 text-white gap-5 relative">
             <div class="flex flex-col gap-5 xl:max-w-2xl mx-auto">
 
@@ -84,6 +61,39 @@
             </div>
             <a href="#sobre" class="animate-bounce text-5xl xl:text-7xl absolute bottom-0">&darr;</a>
         </div>
+        <div id="voy" class="snap-start min-h-dvh w-full bg-white  p-5 xl:p-7 text-gray-900 gap-5 relative">
+            <div class="flex flex-col gap-5">
+                <h2 class="text-4xl xl:text-7xl fade-in">Publicación de anuncios
+                </h2>
+                <p class="max-w-5xl text-sm xl:text-base text-gray-600 leading-relaxed fade-in">
+                    En cumplimiento de lo previsto en el <strong>artículo 11 ter de la Ley de Sociedades de
+                        Capital</strong>,
+                    la sociedad pone a disposición de los interesados la documentación publicada en esta página web,
+                    garantizando el acceso gratuito a su consulta, descarga e impresión, así como la autenticidad de los
+                    documentos insertados y la constancia de su fecha de publicación.
+                </p>
+                @if($documentos->isNotEmpty())
+                    <ul>
+                        @foreach($documentos as $documento)
+                            <li>
+                                <a class="text-gray-600 hover:text-gray-900 hover:underline"
+                                    href="{{ asset('storage/' . $documento->path) }}">{{ $loop->iteration }}.
+                                    {{ $documento->titulo }} versión {{ $documento->version }}.0
+                                    <span class="text-xs">{{$documento->publicado_at->format('d/m/Y')}}</span>
+                                    @if($documento->estado != 'publicado')
+                                        <span class="text-xs">({{ $documento->estado }} el
+                                            {{$documento->retirado_at->format('d/m/Y')}})</span>
+                                    @endif
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    <p>No hay documentos disponibles.</p>
+                @endif
+            </div>
+            <a href="#como" class="animate-bounce text-5xl xl:text-7xl absolute bottom-0">&darr;</a>
+        </div>
         <div id="sobre" class="snap-start h-dvh w-full bg-black relative">
             <img class="h-full w-full object-cover opacity-20 absolute top-0 blur"
                 src="{{ Vite::asset('resources/images/yo.webp') }}" alt="yo">
@@ -108,7 +118,6 @@
                 </div>
                 <a href="#hola" class="animate-bounce text-5xl xl:text-7xl absolute top-5">&uarr;</a>
             </div>
-
         </div>
     </div>
     <script src="./script.js"></script>
