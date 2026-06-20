@@ -1,3 +1,6 @@
+@extends('layout.base')
+
+@section('content')
 <h1>Admin documentos</h1>
 <a href="{{ route('admin.create') }}">Subir nuevo</a>
 <ul>
@@ -13,3 +16,4 @@
         </li>
     @endforeach
 </ul>
+@endsection

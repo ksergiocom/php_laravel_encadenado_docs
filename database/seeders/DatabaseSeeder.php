@@ -23,5 +23,7 @@ class DatabaseSeeder extends Seeder
             'NIF' => 'A12345678',
             'email' => 'sergio@ksergio.com',
         ]);
+
+        $this->call(DocumentoSeeder::class);
     }
 }
