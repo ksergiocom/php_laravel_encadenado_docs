@@ -3,34 +3,49 @@
 @section('content')
     <div class="h-dvh overflow-y-scroll snap-y snap-mandatory scroll-smooth">
         <div id="hola" class="snap-start h-dvh w-full bg-black relative">
-            <video class="h-full w-full object-cover opacity-80 absolute top-0" autoplay muted loop playsinline>
+            <video class="h-full w-full object-cover opacity-30 absolute top-0" autoplay muted loop playsinline>
                 <source src="{{ Vite::asset('resources/videos/vacas-opt.mp4') }}" type="video/mp4">
             </video>
-            <div class="absolute top-0 flex flex-col gap-5 p-5 xl:p-10 text-white place-content-between h-full">
-                <h2 class="text-8xl xl:text-9xl tracking-wide w-fit fade-in">¡Hola!</h2>
-                <div class="flex flex-col items-center self-start gap-3">
-                    <p class="text-lg xl:text-xl font-thin xl:font-normal tracking-widest rotate-180"
-                        style="writing-mode: vertical-rl;">¡Deslízate!</p>
-                    <a href="#como" class="animate-bounce text-5xl xl:text-7xl mt-2">&darr;</a>
+            <div class="w-full absolute top-0 flex flex-col gap-5 p-5 xl:p-10 text-white place-content-between h-full">
+                <h2 class="text-6xl xl:max-w-2/3 xl:text-9xl tracking-wide w-fit fade-in">Ganadería de Razas <span
+                        class="text-green-500">Selectas</span></h2>
+                <div class="flex justify-between gap-5">
+                    <div class="w-fit flex flex-col items-center gap-3 self-end">
+                        <p class="text-lg xl:text-xl font-normal tracking-widest rotate-180"
+                            style="writing-mode: vertical-rl;">¡Conócenos!</p>
+                        <a href="#como" class="animate-bounce text-5xl xl:text-7xl mt-2">&darr;</a>
+                    </div>
+
+                    <p class="p-3 xl:p-10 max-w-3/4 sm:max-w-sm sm:self-end flex text-right">Lorem, ipsum dolor sit amet
+                        consectetur adipisicing elit. Quod laborum illum accusamus, rem quia quae architecto labore odio vel
+                        natus? Aperiam qui corporis, fugit libero quidem sunt doloremque id maiores?</p>
                 </div>
             </div>
         </div>
-        <div id="como" class="snap-start min-h-dvh w-full bg-black xl:content-center  p-5 text-white gap-5 relative">
-            <div class="flex flex-col gap-5 xl:max-w-2xl mx-auto">
+        <div id="como" class="snap-start min-h-dvh w-full bg-black xl:content-center p-5 text-gray-100 gap-5 relative">
+            <div class="flex flex-col md:flex-row gap-5 min-h-dvh h-full w-full">
+                <div class="flex flex-col gap-5 xl:max-w-2xl mx-auto">
 
-                <h2 class="text-4xl xl:text-7xl fade-in">¿CÓMO PUDO NADAR <span class="text-red-600">TAN LEJOS</span>?
-                </h2>
-                <p class="xl:text-xl fade-in">Pues bien, por una parte, y aunque cada especie tiene unas características
-                    algo
-                    distintas, todas
-                    ellas poseen un&nbsp;plumaje especial y una gruesa capa de grasa que <strong>les permite repeler el
-                        agua y aislarse del frío</strong>, manteniendo una temperatura corporal de unos 40 grados
-                    centígrados.</p>
-                <p class="xl:text-xl fade-in">Por otra parte, los pingüinos <strong>pueden beber agua salada</strong>, a
-                    diferencia de muchos
-                    animales. Esto les permite beber del agua del mar, que procesan mediante la glándula supraorbital.
-                    Así, a pesar de su largo viaje, era factible que este ejemplar de pingüino emperador sobreviviera y
-                    llegara hacia costas tan lejanas como las de Australia.&nbsp;</p>
+                    <h2 class="text-4xl xl:text-7xl fade-in">¿QUIÉNES <span class="text-green-500">SOMOS</span>?
+                    </h2>
+                    <p class="xl:text-xl fade-in">Ganadería de Razas Selectas, S.A. es una explotación dedicada a la
+                        <strong>cría y selección de ganado de alto valor genético</strong> en el corazón de Castilla y León,
+                        combinando tradición y manejo profesional.
+                    </p>
+                    <p class="xl:text-xl fade-in">Cuidamos cada detalle del <strong>bienestar animal</strong> y de la
+                        alimentación para garantizar ejemplares sanos, robustos y de calidad contrastada.</p>
+                    <h2 class="text-2xl xl:text-5xl fade-in mt-9">Algo gracioso adicional</h2>
+                    <p class="xl:text-xl fade-in">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
+                        nesciunt porro provident earum maiores quis dolores voluptate? Expedita minus nisi sit, praesentium
+                        fugiat nulla possimus temporibus, vel, dicta rem id culpa ad asperiores ratione nesciunt. Ad
+                        consectetur numquam vero quo?</p>
+                    <p class="xl:text-xl fade-in pb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
+                        nesciunt porro provident earum maiores quis dolores voluptate? Expedita minus nisi sit, praesentium
+                        fugiat nulla possimus temporibus, vel, dicta rem id culpa ad asperiores ratione nesciunt. Ad
+                        consectetur numquam vero quo?</p>
+                </div>
+                <img class="pb-15 md:pb-0 w-full h-full object-center object-cover" src="{{ Vite::asset('resources/images/vaca.jpg') }}"
+                    alt="vaca">
             </div>
             <a href="#peligros" class="animate-bounce text-5xl xl:text-7xl absolute bottom-0">&darr;</a>
         </div>
@@ -41,71 +56,41 @@
             <div class="absolute inset-0 bg-black/40"></div>
             <div class="flex flex-col gap-5 xl:max-w-2xl mx-auto relative z-10">
 
-                <h2 class="text-4xl xl:text-7xl uppercase fade-in">Los <span class="text-red-500">peligros</span> que
-                    acechan a
-                    los
-                    pingüinos
+                <h2 class="text-4xl xl:text-7xl uppercase fade-in">Nuestra <span class="text-red-500">actividad</span>
                 </h2>
-                <p class="xl:text-xl fade-in">Cada 25 de abril se celebra el<strong> Día Mundial del Pingüino</strong>,
-                    una
-                    iniciativa
-                    internacional
-                    ideada para <strong>concienciar a la población sobre la importancia de proteger a estas
-                        aves</strong>,
-                    cuya población ha disminuido drásticamente en el último siglo.</p>
-                <p class="xl:text-xl fade-in">De las 18 especies de pingüino que habita el planeta, <strong>10 se
-                        encuentran
-                        amenazadas, y de
-                        estas, 5
-                        están catalogadas como ‘en peligro’ </strong>por la <strong>Unión Internacional de Conservación
-                        de
-                        la Naturaleza</strong>, de ahí la importancia de llevar a cabo medidas efectivas que ayuden a
-                    combatir sus principales amenazas: el calentamiento global, la contaminación de los océanos, la
-                    expansión de especies invasoras o la sobrepesca.</p>
+                <p class="xl:text-xl fade-in">Desarrollamos una <strong>actividad agrícola ganadera integrada</strong>:
+                    cultivamos nuestros propios forrajes y cerramos el ciclo con la cría del ganado, controlando el
+                    origen de cada recurso.</p>
+                <p class="xl:text-xl fade-in">Apostamos por una <strong>gestión sostenible</strong> de la tierra y del
+                    rebaño, respetando los ritmos naturales y el entorno rural que nos rodea.</p>
             </div>
             <a href="#sobre" class="animate-bounce text-5xl xl:text-7xl absolute bottom-0 z-10">&darr;</a>
         </div>
         <div id="sobre" class="snap-start h-dvh w-full bg-black relative">
             <img class="h-full w-full object-cover opacity-20 absolute top-0"
                 src="{{ Vite::asset('resources/images/vaca.jpg') }}" alt="vaca">
-            <div class="absolute top-0 p-5 text-white relative h-full xl:content-center">
+            <div class="top-0 p-5 text-white relative h-full xl:content-center">
                 <div class="flex flex-col gap-5 xl:max-w-2xl mx-auto">
 
-                    <h2 class="text-4xl xl:text-7xl fade-in">AHORA UN POCO <span class="text-red-600">SOBRE MÍ</span>
+                    <h2 class="text-4xl xl:text-7xl fade-in">UN POCO <span class="text-red-600">SOBRE NOSOTROS</span>
                     </h2>
-                    <p class="xl:text-xl fade-in">Nací en las frías tierras del noreste, donde dirigí mi propia
-                        empresa. Durante años, el <strong>mundo de los negocios</strong> fue mi
-                        vida, pero en el fondo siempre sentí una <strong>atracción irresistible por la
-                            tecnología</strong>.
-                        Un día, decidí dejar todo atrás y sumergirme en el universo de la informática, donde descubrí mi
-                        verdadera pasión: Linux, la programación y las redes.</p>
-                    <p class="xl:text-xl fade-in">Desde entonces, me he vuelto casi obsesivo con el aprendizaje.
-                        Exploro cada
-                        rincón
-                        del software, desarrollo proyectos y profundizo en la seguridad. Ahora estudio con el solo
-                        objetivo
-                        en mente de <strong class="text-red-600">entender y desafiar</strong> los límites del océano
-                        informático.</p>
+                    <p class="xl:text-xl fade-in">Nacimos como un <strong>proyecto familiar</strong> y hoy somos una
+                        sociedad consolidada con domicilio en Valladolid, fieles a nuestras raíces ganaderas.</p>
+                    <p class="xl:text-xl fade-in">Nuestro compromiso es ofrecer <strong class="text-red-600">razas
+                            selectas con plena trazabilidad</strong>, transparencia y respeto por el animal y la tierra.</p>
                 </div>
                 <a href="#anuncios" class="animate-bounce text-5xl xl:text-7xl absolute bottom-0">&darr;</a>
             </div>
         </div>
         <div id="anuncios" class="snap-start min-h-dvh w-full bg-gray-50  p-5 xl:p-7 text-gray-900 gap-5 relative">
             <div class="flex flex-col gap-5">
-                <h2 class="text-4xl xl:text-7xl">TABLÓN DE ANUNCIOS
+                <h2 class="text-4xl xl:text-5xl mb-3">TABLÓN DE ANUNCIOS
                 </h2>
-                <p class="max-w-5xl mt-3 mb-7 text-sm xl:text-xl text-gray-800 leading-relaxed">
-                    En cumplimiento de lo previsto en el <strong>artículo 11 ter de la Ley de Sociedades de
-                        Capital</strong>,
-                    la sociedad pone a disposición de los interesados la documentación publicada en esta página web,
-                    garantizando el acceso gratuito a su consulta, descarga e impresión, así como la autenticidad de los
-                    documentos insertados y la constancia de su fecha de publicación.
-                </p>
+
                 @if($documentos->isNotEmpty())
                     <div class="grid gap-4">
                         @foreach($documentos as $documento)
-                            <article
-                                class="group border border-gray-200 p-4 xl:p-5  transition bg-white">
+                            <article class="group border border-gray-200 p-4 xl:p-5  transition bg-white">
                                 <div class="flex flex-col xl:flex-row xl:items-start xl:justify-between gap-4">
 
                                     <div class="flex-1 min-w-0">
@@ -159,8 +144,12 @@
                 @endif
             </div>
         </div>
-        <footer class="mt-1 text-center bg-black snap-start w-full p-5 xl:p-7 text-gray-200 gap-5 relative">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, modi!
+        <footer
+            class="flex flex-col gap-2 mt-1 text-xs sm:text-sm text-center bg-black snap-start w-full p-3 xl:p-5 text-gray-200 relative">
+            <span>GANADERÍA DE RAZAS SELECTAS, S.A. — CIF A47411285.</span> <span class="text-xs">Inscrita en el Registro
+                Mercantil de
+                Valladolid, Tomo
+                752, Folio 52, Hoja 9167. Domicilio: 47015 Valladolid. Actividad: agrícola ganadera.</span>
         </footer>
     </div>
     <script src="./script.js"></script>
