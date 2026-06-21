@@ -48,3 +48,48 @@ if (!exclusiveDetailsSupported()) {
         });
     });
 }
+
+// Al abrir un menú de acciones, lo colocamos hacia abajo por defecto y, si no
+// cabe bajo el viewport, lo volteamos hacia arriba para que siga siendo clicable.
+document.querySelectorAll('details[name="acciones"]').forEach((item) => {
+    const menu = item.querySelector(".acciones-menu");
+    if (!menu) return;
+
+    item.addEventListener("toggle", () => {
+        if (!item.open) return;
+
+        // Por defecto: desplegar hacia abajo.
+        menu.style.top = "100%";
+        menu.style.bottom = "auto";
+        menu.style.marginTop = "0.25rem";
+        menu.style.marginBottom = "0";
+
+        const rect = menu.getBoundingClientRect();
+
+        if (rect.bottom > window.innerHeight) {
+            // No cabe abajo: voltear hacia arriba.
+            menu.style.top = "auto";
+            menu.style.bottom = "100%";
+            menu.style.marginTop = "0";
+            menu.style.marginBottom = "0.25rem";
+        }
+    });
+});
+
+// Cerrar el menú de acciones al hacer click fuera de su <details>.
+document.addEventListener("click", (event) => {
+    document.querySelectorAll('details[name="acciones"][open]').forEach((item) => {
+        if (!item.contains(event.target)) {
+            item.open = false;
+        }
+    });
+});
+
+// Cerrar el menú de acciones al pulsar Escape.
+document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+
+    document.querySelectorAll('details[name="acciones"][open]').forEach((item) => {
+        item.open = false;
+    });
+});
