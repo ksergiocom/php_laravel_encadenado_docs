@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Estados;
+use App\Models\Documento;
+use App\Services\DocumentoEventoService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-
-use App\Models\Documento;
-use App\Enums\Estados;
-use App\Services\DocumentoEventoService;
+use Illuminate\Support\Str;
 
 class DocumentoController extends Controller
 {
@@ -47,7 +46,7 @@ class DocumentoController extends Controller
             $slug = Str::slug($titulo);
             $version = 1;
 
-            $filename = $slug . '-v' . $version . '.pdf';
+            $filename = $slug.'-v'.$version.'.pdf';
 
             $path = $request->file('archivo')->storeAs(
                 'documentos',
@@ -58,7 +57,7 @@ class DocumentoController extends Controller
             DB::transaction(function () use ($titulo, $slug, $version, $path, $request, $eventoService) {
                 $fileHash = $eventoService->calcularHashArchivo($path);
 
-                $documento = new Documento();
+                $documento = new Documento;
 
                 $documento->titulo = $titulo;
                 $documento->slug = $slug;
@@ -95,8 +94,8 @@ class DocumentoController extends Controller
      */
     public function show(Documento $documento)
     {
-        return view('admin.show',[
-            'documento' => $documento
+        return view('admin.show', [
+            'documento' => $documento,
         ]);
     }
 
@@ -127,7 +126,7 @@ class DocumentoController extends Controller
             $slug = Str::slug($titulo);
             $nuevaVersion = $documento->version + 1;
 
-            $filename = $slug . '-v' . $nuevaVersion . '.pdf';
+            $filename = $slug.'-v'.$nuevaVersion.'.pdf';
 
             $path = $request->file('archivo')->storeAs(
                 'documentos',
@@ -138,7 +137,7 @@ class DocumentoController extends Controller
             DB::transaction(function () use ($titulo, $slug, $nuevaVersion, $path, $documento, $request, $eventoService) {
                 $fileHash = $eventoService->calcularHashArchivo($path);
 
-                $documentoNuevo = new Documento();
+                $documentoNuevo = new Documento;
 
                 $documentoNuevo->titulo = $titulo;
                 $documentoNuevo->slug = $slug;
@@ -186,6 +185,25 @@ class DocumentoController extends Controller
         }
     }
 
+    public function confirmarPublicacion()
+    {
+        return view('admin.confirmar-publicacion');
+    }
+
+    public function confirmarRetiro(Documento $documento)
+    {
+        return view('admin.confirmar-retiro', [
+            'documento' => $documento,
+        ]);
+    }
+
+    public function confirmarSustitucion(Documento $documento)
+    {
+        return view('admin.confirmar-sustitucion', [
+            'documento' => $documento,
+        ]);
+    }
+
     public function retirar(
         Request $request,
         Documento $documento,
@@ -208,5 +226,4 @@ class DocumentoController extends Controller
 
         return redirect()->route('admin.index');
     }
-
 }
