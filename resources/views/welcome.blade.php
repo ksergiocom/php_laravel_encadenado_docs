@@ -69,7 +69,7 @@
 
                     <h2 class="text-4xl xl:text-7xl fade-in">AHORA UN POCO <span class="text-red-600">SOBRE MÍ</span>
                     </h2>
-                    <p class=" xl:text-xl fade-in">Nací en las frías tierras del noreste, donde dirigí mi propia
+                    <p class="xl:text-xl fade-in">Nací en las frías tierras del noreste, donde dirigí mi propia
                         empresa. Durante años, el <strong>mundo de los negocios</strong> fue mi
                         vida, pero en el fondo siempre sentí una <strong>atracción irresistible por la
                             tecnología</strong>.
@@ -90,7 +90,7 @@
             <div class="flex flex-col gap-5">
                 <h2 class="text-4xl xl:text-7xl">TABLÓN DE ANUNCIOS
                 </h2>
-                <p class="max-w-5xl text-sm xl:text-base text-gray-600 leading-relaxed">
+                <p class="max-w-5xl mt-3 mb-7 text-sm xl:text-xl text-gray-800 leading-relaxed">
                     En cumplimiento de lo previsto en el <strong>artículo 11 ter de la Ley de Sociedades de
                         Capital</strong>,
                     la sociedad pone a disposición de los interesados la documentación publicada en esta página web,
@@ -155,6 +155,9 @@
                 @endif
             </div>
         </div>
+        <footer class="mt-1 text-center bg-black snap-start w-full p-5 xl:p-7 text-gray-200 gap-5 relative">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, modi!
+        </footer>
     </div>
     <script src="./script.js"></script>
 @endsection
