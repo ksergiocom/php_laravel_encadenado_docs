@@ -1,7 +1,7 @@
 @extends('layout.base')
 
 @section('content')
-    <div class="h-dvh w-full flex flex-col items-center sm:justify-center">
+    <div class="h-dvh w-full bg-white flex flex-col items-center sm:justify-center">
         <div class="w-full sm:max-w-md flex flex-col gap-3 p-10">
             <h1 class="text-4xl mb-3">Iniciar sesión</h1>
             <form class="flex flex-col gap-3" method="POST" action="{{ route('login') }}">

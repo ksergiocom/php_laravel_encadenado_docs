@@ -1,7 +1,8 @@
 @extends('layout.base')
 
 @section('content')
-    <div class="p-9 max-w-xl">
+    <div class="p-9 min-h-dvh bg-white">
+        <div class="max-w-xl">
         <h1 class="text-4xl md:text-5xl mb-2">Retirar documento</h1>
         <p class="text-gray-600 mb-6">Vas a retirar este documento. Revisa los datos antes de confirmar.</p>
 
@@ -21,5 +22,6 @@
             <button type="submit" class="bg-black text-white p-2 px-5 inline-block">Confirmar retiro</button>
             <a href="{{ route('admin.index') }}" class="border border-gray-400 p-2 px-5 inline-block">Cancelar</a>
         </form>
+        </div>
     </div>
 @endsection

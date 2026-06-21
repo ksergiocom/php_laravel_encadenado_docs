@@ -1,7 +1,8 @@
 @extends('layout.base')
 
 @section('content')
-    <div class="p-9 max-w-xl">
+    <div class="p-9 min-h-dvh bg-white">
+        <div class="max-w-xl">
         <h1 class="text-4xl md:text-5xl mb-2">Sustituir documento</h1>
         <p class="text-gray-600 mb-6">
             Sustituye este documento por una versión nueva. La versión actual quedará
@@ -39,5 +40,6 @@
                 <a href="{{ route('admin.index') }}" class="border border-gray-400 p-2 px-5 inline-block">Cancelar</a>
             </div>
         </form>
+        </div>
     </div>
 @endsection

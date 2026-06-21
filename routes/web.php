@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DocumentoController;
+use App\Http\Controllers\EventoController;
 use App\Models\Documento;
 use Illuminate\Support\Facades\Route;
 
@@ -27,4 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('admin', DocumentoController::class)
         ->parameters(['admin' => 'documento'])
         ->names('admin');
+
+    Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
+    Route::get('/eventos/{evento}', [EventoController::class, 'show'])->name('eventos.show');
 });

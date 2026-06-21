@@ -1,7 +1,16 @@
 @extends('layout.base')
 
 @section('content')
-    <div class="p-9">
+    <div class="p-9 min-h-dvh bg-white">
+        <div class="flex gap-4 mb-7">
+            <a class="text-black underline" href="{{ route('admin.index') }}">Documentos</a>
+            <a class="text-gray-500 hover:text-black hover:underline" href="{{ route('eventos.index') }}">Eventos</a>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="text-gray-500 hover:text-black hover:underline cursor-pointer">Cerrar
+                    sesión</button>
+            </form>
+        </div>
         <h1 class="text-4xl md:text-5xl mb-5">Listado de documentos</h1>
         <a class="bg-black text-white p-2 px-5 inline-block mb-7" href="{{ route('admin.publicar') }}">Publicar documento</a>
         <table class="text-left table-fixed w-full border-collapse">
@@ -23,7 +32,8 @@
                             <details name="acciones" class="relative inline-block text-left">
                                 <summary class="cursor-pointer list-none select-none text-sm border p-1 px-3 inline-block">Acciones &darr;</summary>
                                 <div class="acciones-menu absolute right-0 top-full z-20 mt-1 w-44 flex flex-col text-left bg-white border border-gray-400 shadow-lg">
-                                    <a class="p-2 hover:bg-gray-100" href="{{ asset('storage/' . $documento->path) }}">Descargar</a>
+                                    <a class="p-2 hover:bg-gray-100" href="{{ route('admin.show', ['documento' => $documento]) }}">Detalles</a>
+                                    <a class="p-2 hover:bg-gray-100" href="{{ asset('storage/' . $documento->path) }}">Mostrar</a>
                                     @if ($documento->estado == 'publicado')
                                         <a class="p-2 hover:bg-gray-100" href="{{ route('admin.retirar', ['documento' => $documento]) }}">Retirar</a>
                                         <a class="p-2 hover:bg-gray-100" href="{{ route('admin.sustituir', ['documento' => $documento]) }}">Sustituir</a>
