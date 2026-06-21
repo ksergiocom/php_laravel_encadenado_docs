@@ -18,8 +18,9 @@
                     </div>
 
                     <p
-                        class="p-3 md:text-xl xl:text-2xl xl:p-10 max-w-3/4 sm:max-w-sm lg:max-w-xl sm:self-end flex text-right fade-in">
-                        Más de tres décadas criando ganado de razas selectas en Castilla y León, uniendo tradición,
+                        class="p-3 md:text-xl xl:text-2xl xl:p-10 max-w-3/4 sm:max-w-sm lg:max-w-xl sm:self-end text-balance fade-in">
+                        Más de tres décadas criando ganado de razas selectas en <span class="inline text-green-500">Castilla
+                            y León</span>, uniendo tradición,
                         bienestar animal y la máxima calidad en cada ejemplar.</p>
                 </div>
             </div>
@@ -47,7 +48,7 @@
                             entorno rural, con plena <strong class="text-green-600">trazabilidad de cada ejemplar</strong>,
                             desde la explotación hasta el cliente final.</p>
                     </div>
-                    <div class="md:w-1/2 relative min-h-[300px]">
+                    <div class="md:w-1/2 relative min-h-[300px] fade-in">
                         <img class="absolute inset-0 w-full h-full object-cover object-center"
                             src="{{ Vite::asset('resources/images/vaca.jpg') }}" alt="vaca">
                     </div>
@@ -67,10 +68,16 @@
                         <p class="xl:text-xl fade-in">Nuestro compromiso es ofrecer <strong class="text-green-600">razas
                                 selectas con plena trazabilidad</strong>, transparencia y respeto por el animal y la tierra.
                         </p>
-                        <h2 class="text-2xl xl:text-5xl fade-in mt-9">Algo gracioso adicional</h2>
-                        <p class="xl:text-xl fade-in pb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
-                            suscipit tenetur! Vero eos ipsam, impedit cumque quod distinctio veritatis, cupiditate quo
-                            <strong class="text-green-600">maiores voluptatem</strong> sed commodi?
+                        <h2 class="text-2xl xl:text-5xl fade-in mt-9">Nuestra Filosofía</h2>
+                        <p class="xl:text-xl fade-in pb-5">En <strong class="text-green-600">Ganadería de Razas Selectas, S.A.</strong> entendemos la actividad
+                            ganadera como una responsabilidad a largo plazo. Nuestro modelo de trabajo se basa en la mejora
+                            continua, la gestión responsable de los recursos y el compromiso con los estándares de calidad
+                            que demandan nuestros clientes y colaboradores.
+                        </p>
+                        <p class="fade-in">
+                            La experiencia acumulada durante años de actividad nos permite combinar <strong class="text-green-600">tradición</strong> y
+                            <strong class="text-green-600">profesionalización</strong>, garantizando procesos transparentes y una gestión
+                            orientada a la sostenibilidad y al desarrollo del entorno rural.
                         </p>
                     </div>
                 </div>
@@ -140,7 +147,8 @@
             </div>
             <footer
                 class="flex flex-col gap-2 mt-1 text-xs sm:text-sm text-center bg-black w-full p-5 xl:p-5 text-gray-200">
-                <span><strong class="font-bold">GANADERÍA DE RAZAS SELECTAS, S.A. </strong>— CIF A47411285.</span> <span class="text-xs">Inscrita en el
+                <span><strong class="font-bold">GANADERÍA DE RAZAS SELECTAS, S.A. </strong>— CIF A47411285.</span> <span
+                    class="text-xs">Inscrita en el
                     Registro
                     Mercantil de
                     Valladolid, Tomo
