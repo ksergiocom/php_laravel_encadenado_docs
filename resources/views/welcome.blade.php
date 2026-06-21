@@ -3,8 +3,9 @@
 @section('content')
     <div class="h-dvh overflow-y-scroll snap-y snap-mandatory scroll-smooth">
         <div id="hola" class="snap-start h-dvh w-full bg-black relative">
-            <img class="h-full w-full object-cover opacity-80 absolute top-0"
-                src="{{ Vite::asset('resources/images/pinguino.webp') }}" alt="pinguino">
+            <video class="h-full w-full object-cover opacity-80 absolute top-0" autoplay muted loop playsinline>
+                <source src="{{ Vite::asset('resources/videos/vacas-opt.mp4') }}" type="video/mp4">
+            </video>
             <div class="absolute top-0 flex flex-col gap-5 p-5 xl:p-10 text-white place-content-between h-full">
                 <h2 class="text-8xl xl:text-9xl tracking-wide w-fit fade-in">¡Hola!</h2>
                 <div class="flex flex-col items-center self-start gap-3">
@@ -34,10 +35,13 @@
             <a href="#peligros" class="animate-bounce text-5xl xl:text-7xl absolute bottom-0">&darr;</a>
         </div>
         <div id="peligros"
-            class="snap-start min-h-dvh w-full bg-gradient-to-br from-red-600 to-red-800 xl:content-center  p-5 text-white relative">
-            <div class="flex flex-col gap-5 xl:max-w-2xl mx-auto">
+            class="snap-start min-h-dvh w-full bg-gradient-to-br bg-black xl:content-center  p-5 text-white relative">
+            <img class="h-full w-full object-cover absolute top-0 left-0 opacity-40"
+                src="{{ Vite::asset('resources/images/granaja.jpg') }}" alt="granja">
+            <div class="absolute inset-0 bg-black/40"></div>
+            <div class="flex flex-col gap-5 xl:max-w-2xl mx-auto relative z-10">
 
-                <h2 class="text-4xl xl:text-7xl uppercase fade-in">Los <span class="text-gray-900">peligros</span> que
+                <h2 class="text-4xl xl:text-7xl uppercase fade-in">Los <span class="text-red-500">peligros</span> que
                     acechan a
                     los
                     pingüinos
@@ -59,11 +63,11 @@
                     combatir sus principales amenazas: el calentamiento global, la contaminación de los océanos, la
                     expansión de especies invasoras o la sobrepesca.</p>
             </div>
-            <a href="#sobre" class="animate-bounce text-5xl xl:text-7xl absolute bottom-0">&darr;</a>
+            <a href="#sobre" class="animate-bounce text-5xl xl:text-7xl absolute bottom-0 z-10">&darr;</a>
         </div>
         <div id="sobre" class="snap-start h-dvh w-full bg-black relative">
-            <img class="h-full w-full object-cover opacity-20 absolute top-0 blur"
-                src="{{ Vite::asset('resources/images/yo.webp') }}" alt="yo">
+            <img class="h-full w-full object-cover opacity-20 absolute top-0"
+                src="{{ Vite::asset('resources/images/vaca.jpg') }}" alt="vaca">
             <div class="absolute top-0 p-5 text-white relative h-full xl:content-center">
                 <div class="flex flex-col gap-5 xl:max-w-2xl mx-auto">
 
@@ -86,7 +90,7 @@
                 <a href="#anuncios" class="animate-bounce text-5xl xl:text-7xl absolute bottom-0">&darr;</a>
             </div>
         </div>
-        <div id="anuncios" class="snap-start min-h-dvh w-full bg-white  p-5 xl:p-7 text-gray-900 gap-5 relative">
+        <div id="anuncios" class="snap-start min-h-dvh w-full bg-gray-50  p-5 xl:p-7 text-gray-900 gap-5 relative">
             <div class="flex flex-col gap-5">
                 <h2 class="text-4xl xl:text-7xl">TABLÓN DE ANUNCIOS
                 </h2>
