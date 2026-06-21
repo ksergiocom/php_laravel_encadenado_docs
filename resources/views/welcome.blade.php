@@ -50,7 +50,7 @@
                     </div>
                     <div class="md:w-1/2 relative min-h-[300px]">
                         <img class="absolute inset-0 w-full h-full object-cover object-center"
-                            src="{{ Vite::asset('resources/images/vaca.jpg') }}" alt="vaca">
+                            src="{{ Vite::asset('resources/images/vaca.webp') }}" alt="vaca">
                     </div>
                 </div>
 
