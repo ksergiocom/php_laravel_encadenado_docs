@@ -48,7 +48,7 @@
                             entorno rural, con plena <strong class="text-green-600">trazabilidad de cada ejemplar</strong>,
                             desde la explotación hasta el cliente final.</p>
                     </div>
-                    <div class="md:w-1/2 relative min-h-[300px] fade-in">
+                    <div class="md:w-1/2 relative min-h-[300px]">
                         <img class="absolute inset-0 w-full h-full object-cover object-center"
                             src="{{ Vite::asset('resources/images/vaca.jpg') }}" alt="vaca">
                     </div>
